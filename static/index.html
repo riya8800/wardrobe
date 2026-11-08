@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Wardrobe</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+    .card { border: 1px solid #ccc; border-radius: 8px; padding: 12px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Wardrobe categories</h1>
+  <div id="list">Loading...</div>
+  <script>
+    fetch("/categories")
+      .then(r => r.json())
+      .then(cats => {
+        document.getElementById("list").innerHTML = cats
+          .map(c => `<div class="card"><b>${c.name}</b><br>${c.types.join(", ")}</div>`)
+          .join("");
+      });
+  </script>
+</body>
+</html>
